@@ -133,7 +133,8 @@ module.exports = function (RED) {
 					Jimp.read(imageData)
 						.then(img => {
 							try {
-								img.getBase64(Jimp.AUTO, (err, b64) => {
+								img.getBase64(Jimp.AUTO, (err, b64) => 
+								{
 									if (err) {
 										nodeStatusError(err, msg, "Error getting base64 image")
 										return;
@@ -159,6 +160,10 @@ module.exports = function (RED) {
 		node.on("close", function () {
 			RED.comms.publish("image-tools-image-viewer", { id: this.id });
 			node.status({});
+			node.status({
+									fill: "blue",
+									shape: "dot",
+								text: "test"})
 		});
 	}
 	RED.nodes.registerType("image viewer", imageViewer);
